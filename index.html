@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1724">
+<title>環状線｜終点のない旅</title>
+<style>
+:root{--bg:#0b1724;--panel:#14293b;--line:#6f93a2;--ink:#e7f0f4;--muted:#96adba;--gold:#efc98b;--mint:#91cfbf;--ticket:#f7eedc;--tink:#263846}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#274d63,transparent 43%),var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;min-height:100vh}button{font:inherit;touch-action:manipulation}.wrap{max-width:620px;margin:auto;padding:22px 15px 70px}.head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff24;padding-bottom:18px}.kicker{font-size:11px;letter-spacing:.22em;color:var(--gold);font-weight:800}.head h1{font-family:serif;font-size:34px;letter-spacing:.18em;margin:5px 0 0}.head small{color:var(--muted)}.inf{height:58px;width:58px;border:1px solid #6f8491;border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:26px}.stage{display:flex;justify-content:space-between;align-items:center;padding:17px 2px 12px;gap:12px}.stage b{font-size:12px;color:var(--gold);letter-spacing:.14em}.stage span{font-weight:700}.card{background:linear-gradient(155deg,#1b3447,#122638);border:1px solid #49647666;border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 15px 45px #0004}.map{position:relative;width:min(100%,470px);aspect-ratio:1;margin:auto}.map svg{position:absolute;inset:0;width:100%;height:100%}.station{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;border:3px solid #e7f0f4;background:#173244;box-shadow:0 0 0 4px #0e2130;padding:0}.station.active{background:var(--gold);border-color:#fff2d2;box-shadow:0 0 0 4px #263a48,0 0 18px #efc98b88}.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}.center strong{font-family:serif;letter-spacing:.12em}.center small{display:block;color:var(--muted);margin-top:5px;letter-spacing:.12em}.ticket{background:var(--ticket);color:var(--tink);border-radius:15px;padding:20px;box-shadow:inset 0 0 0 6px #f2e4cb,0 12px 30px #0004;position:relative}.ticket:before,.ticket:after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;background:var(--panel);top:53%}.ticket:before{left:-12px}.ticket:after{right:-12px}.topt{display:flex;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:.13em;color:#806d55}.prompt{font-size:15px;font-weight:750;white-space:pre-line;line-height:1.8;margin:16px 0}.slots{display:flex;justify-content:center;gap:10px;min-height:50px;margin:11px 0}.slot{width:40px;height:46px;border-bottom:2px solid #b99d78;display:grid;place-items:center;font-size:25px;font-weight:900;color:#c1b39f}.slot.on{color:#2d414e;background:#ede0c7;border-radius:5px 5px 0 0}.actions{display:flex;gap:8px;margin-top:13px}.primary,.secondary{border-radius:11px;padding:12px 13px;font-weight:800}.primary{border:0;background:var(--gold);color:#213746;flex:1;box-shadow:0 4px 0 #b98850}.secondary{border:1px solid #7894a5;background:#264455;color:#e4eff4}.primary:disabled,.secondary:disabled{opacity:.4}.flip{background:none;border:0;color:#5b7380;text-decoration:underline;text-underline-offset:4px;margin-top:10px}.back{background:#efe3cd;border:1px solid #d7c4a3;border-radius:9px;padding:13px;margin-top:12px;font-size:13px}.switch{display:flex;gap:8px;margin-bottom:15px}.mode{flex:1;border:1px solid #698694;background:transparent;color:var(--ink);padding:10px;border-radius:10px;font-weight:800}.mode.active{background:var(--gold);color:#253844;border-color:var(--gold)}.mode.c.active{background:var(--mint);border-color:var(--mint)}.hidden{display:none!important}.platform{overflow:hidden}.train{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.car{min-height:78px;border:2px solid #aac1c7;background:#e5e8e4;border-radius:10px 10px 7px 7px;position:relative;color:#324b57;font-size:10px;font-weight:800}.car:before{content:"";position:absolute;top:9px;left:12%;right:12%;height:9px;border-radius:3px;background:#87a9b0}.car:after{content:"";position:absolute;left:20%;right:20%;bottom:12px;height:25px;border:1px solid #7899a2;border-radius:3px}.car.blank{opacity:.24;border-style:dashed}.car:disabled{cursor:default}.rail{border-top:4px solid #79959e;border-bottom:4px solid #79959e;height:10px;margin:3px 5px 0;opacity:.5}.platform.wait .train{visibility:hidden}.platform.arrive .train{animation:arrive 1.15s cubic-bezier(.18,.75,.25,1)}@keyframes arrive{from{transform:translateX(-115%)}to{transform:translateX(0)}}.dialog{position:fixed;inset:0;background:#06111cce;display:grid;place-items:center;padding:18px;z-index:10}.box{width:min(100%,460px);background:linear-gradient(145deg,#25485b,#132737);border:1px solid #667e8a;border-radius:20px;padding:25px}.box .kick{font-size:11px;color:var(--gold);font-weight:800;letter-spacing:.16em}.box h2{font-family:serif;margin:8px 0 10px}.box p{white-space:pre-line;line-height:1.9;color:#dbe8ed}.end{text-align:center;padding:35px 20px}.end h2{font-family:serif;font-size:40px;letter-spacing:.18em}.end p{white-space:pre-line;line-height:2}.stamp{display:inline-block;border:2px solid #a2714d;color:#a2714d;padding:4px 10px;transform:rotate(-8deg);font-size:11px;font-weight:900}.reveal{position:fixed;inset:0;background:#07131cf2;z-index:20;display:grid;place-items:center}.reveal div{background:var(--ticket);color:var(--tink);border:2px solid #d5bd93;border-radius:16px;padding:35px 25px;text-align:center;width:min(90%,420px)}.reveal strong{display:block;font-family:serif;font-size:44px;letter-spacing:.18em;margin:15px 0}.foot{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
+@media(max-width:520px){.wrap{padding:15px 12px 60px}.head h1{font-size:30px}.station{width:26px;height:26px}.card{padding:15px}.car{min-height:70px}.stage span{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.platform.arrive .train{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="head"><div><div class="kicker">CIRCULAR LINE / WEB PUZZLE</div><h1>環状線</h1><small>終点のない旅</small></div><div class="inf">∞</div></header>
+<div id="game">
+<div class="stage"><div><b id="qn">QUESTION 01</b>　<span id="qname"></span></div></div>
+<section class="card">
+<div class="map" id="map"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="39" fill="none" stroke="#83a6b3" stroke-width="2.7"/><circle cx="50" cy="50" r="34.5" fill="none" stroke="#436675" stroke-width=".8" stroke-dasharray="1.2 1.6"/></svg><div class="center"><strong>終点のない旅</strong><small>12 STATIONS</small></div></div>
+</section>
+<section class="card">
+<div id="front" class="ticket"><div class="topt"><span>環状鉄道　乗車券</span><span id="no">NO. 01</span></div><div class="prompt" id="prompt"></div><div class="slots" id="slots"></div><div class="actions"><button id="undo" class="secondary">戻す</button><button id="submit" class="primary">発券する</button></div><button id="toBack" class="flip hidden">切符を裏返す</button></div>
+<div id="back" class="ticket hidden"><div class="topt"><span>環状鉄道　乗車券／裏面</span><span>運行記録</span></div><div class="back"><b>車両設定</b><br><br><span id="avail">A車両 / B車両</span><br><br>保留中：<b id="held">1両</b></div><button id="toFront" class="flip">表面に戻す</button></div>
+</section>
+<section class="card">
+<div class="switch"><button class="mode active" data-mode="A">A車両</button><button class="mode" data-mode="B">B車両</button><button class="mode c hidden" data-mode="C">C車両</button></div>
+<div id="platform" class="platform wait"><div id="train" class="train"></div></div><div class="rail"></div>
+</section>
+</div>
+<section id="ending" class="card end hidden"><div id="endBadge" class="kicker"></div><h2>またね。</h2><div id="stamp" class="stamp hidden">5号車 乗車済</div><p id="endText"></p><button id="revisit" class="secondary">第3問から再乗車</button> <button id="reset2" class="secondary">最初から</button></section>
+<div class="foot"><button id="reset" style="background:none;border:0;color:inherit;text-decoration:underline">最初から遊ぶ</button></div>
+</div>
+<div id="dlg" class="dialog hidden"><div class="box"><div id="dk" class="kick"></div><h2 id="dt"></h2><p id="db"></p><button id="dgo" class="primary" style="width:100%">戻る</button></div></div>
+<div id="reveal" class="reveal hidden"><div><small>最後の言葉</small><strong id="rv">■■■</strong><small>ご乗車、ありがとうございました。</small></div></div>
+<script>
+(function(){
+'use strict';
+var N={
+A:['ねずみ','うし','とら','うさぎ','たつ','へび','うま','ひつじ','さる','にわとり','いぬ','いのしし'],
+B:['おひつじ','おうし','ふたご','かに','しし','おとめ','てんびん','さそり','いて','やぎ','みずがめ','うお'],
+C:['むつき','きさらぎ','やよい','うづき','さつき','みなづき','ふみづき','はづき','ながつき','かんなづき','しもつき','しわす']};
+var Q=[
+{n:'QUESTION 01',name:'はじめての乗車',p:'列車に乗って、さあ始めよう。',l:2,a:'たび',w:'ご乗車を確認しました。'},
+{n:'QUESTION 02',name:'改札の向こうへ',p:'切符を持って、まず通る場所。',l:4,a:'かいさつ',w:'改札を通過しました。'},
+{n:'EXTRA TICKET',name:'まだ有効な切符',p:'次の列車を呼び出してください。',l:2,a:'つぎ',w:'新しい車両が到着します。',extra:1},
+{n:'QUESTION 03',name:'行き先のない切符',p:'行き先',l:4,a:'いきさき',w:'行き先を確認しました。',q3:1},
+{n:'QUESTION 04',name:'降車の時間',p:'目的地に到着しました。\n列車から降りる動作を、3文字で。',l:3,a:'おりる',w:'降車を確認しました。'},
+{n:'FINAL QUESTION',name:'終点のない旅',p:'この列車に、終点はない。\nいつかまた、ここで会えるから。\n「さようなら」の代わりに、3文字の言葉を。',l:3,a:'またね',final:1}];
+var key='kanjosen-pages-test-v1';
+var init={s:0,m:'A',st:0,stopped:false,q:[],c:false,secret:false,end:false};
+var state=load(),back=false,cb=null;
+function $(x){return document.getElementById(x)}
+function load(){try{var x=JSON.parse(localStorage.getItem(key)||'null');return x?Object.assign({},init,x,{q:[]}):Object.assign({},init)}catch(e){return Object.assign({},init)}}
+function save(){try{localStorage.setItem(key,JSON.stringify(Object.assign({},state,{q:[]})))}catch(e){}}
+function ch(m,s,c){return Array.from(N[m][s]||'')[c]||null}
+function q(){return Q[state.s]}
+function station(i){var d=(-90+i*30)*Math.PI/180,b=document.createElement('button');b.className='station';b.style.left=(50+39*Math.cos(d))+'%';b.style.top=(50+39*Math.sin(d))+'%';b.setAttribute('aria-label','駅');b.onclick=function(){var first=!state.stopped;state.st=i;state.stopped=true;render();if(first){$('platform').classList.remove('wait');$('platform').classList.add('arrive');setTimeout(function(){$('platform').classList.remove('arrive')},1300)}save()};$('map').appendChild(b)}
+for(var i=0;i<12;i++)station(i);
+function cars(){var t=$('train');t.innerHTML='';for(var i=0;i<5;i++){(function(i){var x=ch(state.m,state.st,i),b=document.createElement('button');b.className='car'+(x?'':' blank');b.disabled=!x;b.innerHTML='<span style="position:absolute;bottom:5px;left:0;right:0">'+(i+1)+'号車</span>';if(x)b.onclick=function(){if(state.q.length<q().l){state.q.push({m:state.m,s:state.st,c:i,v:x});render()}};t.appendChild(b)})(i)}}
+function render(){
+if(state.end){$('game').classList.add('hidden');$('ending').classList.remove('hidden');end();return}else{$('game').classList.remove('hidden');$('ending').classList.add('hidden')}
+var z=q();$('qn').textContent=z.n;$('qname').textContent=z.name;$('no').textContent='NO. '+String(state.s+1).padStart(2,'0');$('prompt').textContent=z.p;
+document.querySelectorAll('.station').forEach(function(b,i){b.classList.toggle('active',state.stopped&&i===state.st)});
+document.querySelectorAll('.mode').forEach(function(b){var m=b.dataset.mode;b.classList.toggle('hidden',m==='C'&&!state.c);b.classList.toggle('active',m===state.m)});
+$('platform').classList.toggle('wait',!state.stopped);cars();
+var s=$('slots');s.innerHTML='';for(var i=0;i<z.l;i++){var e=document.createElement('span');e.className='slot'+(i<state.q.length?' on':'');e.textContent=i<state.q.length?'■':'□';s.appendChild(e)}
+$('undo').disabled=!state.q.length;$('submit').disabled=state.q.length!==z.l;
+$('toBack').classList.toggle('hidden',state.s<2);$('avail').textContent=state.c?'A車両 / B車両 / C車両':'A車両 / B車両';$('held').textContent=state.c?'なし':'1両';
+$('front').classList.toggle('hidden',back);$('back').classList.toggle('hidden',!back)
+}
+function dialog(k,t,b,next){$('dk').textContent=k;$('dt').textContent=t;$('db').textContent=b||'';$('dlg').classList.remove('hidden');cb=next||null}
+$('dgo').onclick=function(){$('dlg').classList.add('hidden');var f=cb;cb=null;if(f)f()};
+function submit(){
+var z=q();if(state.q.length!==z.l)return;var a=state.q.map(function(x){return x.v}).join('');
+if(a===z.a){
+if(z.q3&&state.q.some(function(x){return x.m==='C'&&x.s===9&&x.c===4}))state.secret=true;
+if(z.extra)state.c=true;
+if(z.final){reveal();return}
+dialog('発券完了',z.w,'',function(){state.s++;state.q=[];if(state.s===1)state.m='B';if(state.s===2)state.m='A';if(state.s===3)state.m='C';back=false;save();render()});save();return}
+if(a==='ずる'){dialog('別の行き先','「ずる」を確認しました。','言葉としては成立しています。\nでも、今回の目的地ではありません。');return}
+dialog('照合結果','行き先を確認できませんでした。','')
+}
+function reveal(){var f=['■■■','ま■■','また■','またね'],i=0;$('reveal').classList.remove('hidden');function go(){$('rv').textContent=f[i++];if(i<f.length)setTimeout(go,700);else setTimeout(function(){$('reveal').classList.add('hidden');state.end=true;state.q=[];save();render()},1000)}go()}
+function end(){var tr=state.secret;$('endBadge').textContent=tr?'SECRET JOURNEY / TRUE END':'JOURNEY COMPLETED / NORMAL END';$('stamp').classList.toggle('hidden',!tr);$('endText').textContent=tr?'最後まで、この列車に乗ってくれてありがとう。\n\nそして、この環状線に隠された小さな秘密まで、見つけてくれてありがとう。\n\n誰も乗らないと思っていた5号車にも、あなたは乗ってくれました。\n\nいつかまた、どこかの謎で会いましょう。':'最後まで、この列車に乗ってくれてありがとう。\n\nこの旅が、あなたにとって少しでも楽しい時間になっていたら嬉しいです。\n\nいつかまた、どこかの謎で会いましょう。'}
+document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){if(b.dataset.mode==='C'&&!state.c)return;state.m=b.dataset.mode;render();save()}});
+$('undo').onclick=function(){state.q.pop();render()};$('submit').onclick=submit;$('toBack').onclick=function(){back=true;render()};$('toFront').onclick=function(){back=false;render()};
+function reset(){if(confirm('最初から遊びますか？')){state=Object.assign({},init);back=false;save();render()}}
+$('reset').onclick=reset;$('reset2').onclick=reset;$('revisit').onclick=function(){state.s=3;state.end=false;state.m='C';state.st=9;state.stopped=true;state.q=[];back=false;save();render();window.scrollTo(0,0)};
+render();
+})();
+</script>
+</body>
+</html>
