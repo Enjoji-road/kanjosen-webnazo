@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>漢字ダンジョン 試作版</title>
 <style>
-:root{--bg:#111315;--panel:#1a1f22;--stone:#262c30;--line:#465159;--ink:#f0eadf;--muted:#9ba7ad;--gold:#c8a35d;--teal:#6eb4aa;--danger:#d17b72;--cell:clamp(24px,7.5vw,42px)}
-*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% 0,#1d2528,#0e1113 55%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}body{min-height:100vh}
-button{font:inherit}.app{max-width:760px;margin:auto;padding:18px 14px 80px}.title{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}.title h1{margin:0;font-size:22px;letter-spacing:.12em}.subtitle{font-size:12px;color:var(--muted);margin-top:4px}.reset{border:1px solid #3f494f;background:#161b1e;color:#aeb8bd;border-radius:8px;padding:7px 10px;font-size:12px}
-.tabs{display:flex;gap:7px;margin:18px 0 12px;flex-wrap:wrap}.tab{border:1px solid #49545b;background:#171c1f;color:#aeb7bc;border-radius:9px;padding:8px 13px;min-width:52px}.tab.active{background:#273136;color:#fff;border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,163,93,.18) inset}.panel{background:rgba(23,28,31,.92);border:1px solid #39444a;border-radius:16px;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+:root{--bg:#160d08;--panel:#2a1a12;--stone:#3a291f;--line:#71533c;--ink:#f3e5cc;--muted:#b7a188;--gold:#d5a85f;--teal:#9aa673;--danger:#c87767;--cell:clamp(24px,7.5vw,42px)}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#4a2f1d 0,#2a190f 30%,#140b07 72%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}body{min-height:100vh}
+button{font:inherit}.app{max-width:760px;margin:auto;padding:18px 14px 80px}.title{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}.title h1{margin:0;font-size:22px;letter-spacing:.12em}.subtitle{font-size:12px;color:var(--muted);margin-top:4px}.reset{border:1px solid #624834;background:#24150e;color:#c6b39b;border-radius:8px;padding:7px 10px;font-size:12px}
+.tabs{display:flex;gap:7px;margin:18px 0 12px;flex-wrap:wrap}.tab{border:1px solid #654a36;background:#24160f;color:#c1ab91;border-radius:9px;padding:8px 13px;min-width:52px}.tab.active{background:#4b3424;color:#fff1d6;border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,163,93,.18) inset}.panel{background:linear-gradient(180deg,rgba(52,33,23,.96),rgba(35,21,15,.97));border:1px solid #6b4d38;border-radius:16px;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
 .status{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.floorname{font-weight:700;letter-spacing:.12em}.count{font-size:12px;color:var(--muted)}
-.board-wrap{display:flex;justify-content:center;overflow:auto;padding:8px 0 4px}.board{display:grid;grid-template-columns:repeat(11,var(--cell));grid-template-rows:repeat(11,var(--cell));gap:2px;background:#121618;border:1px solid #313a3f;padding:7px;border-radius:12px;box-shadow:inset 0 0 30px rgba(0,0,0,.45)}
-.cell{width:var(--cell);height:var(--cell);display:flex;align-items:center;justify-content:center;position:relative;border-radius:4px;background:#15191b;color:transparent;user-select:none}.cell.path{background:#292f33;border:1px solid #4b565d;color:var(--ink);font-weight:700;font-size:clamp(15px,4.5vw,23px)}.cell.emptytext{color:transparent}.cell.cross{box-shadow:inset 0 0 0 1px rgba(110,180,170,.45)}.cell.meta-ready{cursor:pointer}.cell.meta-ready::after{content:attr(data-num);position:absolute;right:1px;top:-3px;color:#f1cc78;font-size:11px;font-weight:800;text-shadow:0 1px 2px #000}.cell.rock{background:#434b50;border:1px solid #707a80;color:#fff;font-size:14px;cursor:pointer;box-shadow:inset 0 0 10px rgba(255,255,255,.04)}.cell.hot{cursor:pointer}.cell.hot:active{transform:scale(.94)}
-.section{margin-top:14px}.section-title{font-size:12px;color:#b4bec3;letter-spacing:.12em;margin-bottom:7px}.tiles{display:flex;gap:8px;flex-wrap:wrap}.tile{width:46px;height:46px;border:1px solid #5a666d;background:linear-gradient(#f3ede0,#d8cdb9);color:#27231f;border-radius:8px;font-weight:800;font-size:22px;box-shadow:0 3px 0 #887c69;transition:.12s}.tile.selected{transform:translateY(2px);box-shadow:0 1px 0 #887c69;outline:2px solid var(--teal)}.tile.used{opacity:.28;filter:grayscale(1);box-shadow:none}.tile:disabled{cursor:default}
-.inventory{display:flex;align-items:center;gap:8px;min-height:46px}.inv-label{font-size:12px;color:var(--muted)}.inv-tile{width:42px;height:42px;border-radius:8px;border:1px solid var(--gold);background:#eee4cf;color:#29231d;font-size:20px;font-weight:800}.inv-tile.selected{outline:3px solid var(--teal)}
-.stairs{margin:16px auto 2px;display:none;border:1px solid #857047;background:#2a251c;color:#f3d99c;padding:11px 18px;border-radius:10px;font-weight:700}.stairs.show{display:block}.meta{margin-top:14px;border-top:1px solid #343e43;padding-top:12px;display:none}.meta.show{display:block}.slots{display:flex;gap:6px;justify-content:center}.slot{width:36px;height:42px;border-bottom:2px solid #6d787e;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700}.hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#111719;border:1px solid #4c5b63;color:#fff;border-radius:10px;padding:10px 14px;opacity:0;pointer-events:none;transition:.2s;z-index:50;max-width:86vw;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:24px;z-index:60}.modal.show{display:flex}.modal-card{width:min(440px,100%);background:#1a2023;border:1px solid #59666d;border-radius:16px;padding:24px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.5)}.modal-card h2{margin:0 0 12px;font-size:20px}.modal-card p{white-space:pre-line;line-height:1.9;color:#e6e1d8}.modal-card button{margin-top:12px;border:1px solid #77633c;background:#2e281d;color:#f5d99b;border-radius:9px;padding:9px 16px}.clear-title{font-size:28px;letter-spacing:.16em;color:#f0d18f}.tiny{font-size:11px;color:#879399;margin-top:14px;text-align:center}
+.board-wrap{display:flex;justify-content:center;overflow:auto;padding:8px 0 4px}.board{display:grid;grid-template-columns:repeat(11,var(--cell));grid-template-rows:repeat(11,var(--cell));gap:2px;background:#150d08;border:1px solid #5c402e;padding:7px;border-radius:12px;box-shadow:inset 0 0 30px rgba(0,0,0,.45)}
+.cell{width:var(--cell);height:var(--cell);display:flex;align-items:center;justify-content:center;position:relative;border-radius:4px;background:#21150f;color:transparent;user-select:none}.cell.path{background:linear-gradient(145deg,#523b2b,#3f2c20);border:1px solid #76583f;color:var(--ink);font-weight:700;font-size:clamp(15px,4.5vw,23px)}.cell.emptytext{color:transparent}.cell.cross{box-shadow:inset 0 0 0 1px rgba(154,166,115,.55)}.cell.meta-ready{cursor:pointer}.cell.meta-ready::after{content:attr(data-num);position:absolute;right:1px;top:-3px;color:#f1cc78;font-size:11px;font-weight:800;text-shadow:0 1px 2px #000}.cell.rock{background:linear-gradient(145deg,#66594d,#443a32);border:1px solid #8c7a68;color:#f4eadb;font-size:14px;cursor:pointer;box-shadow:inset 0 0 10px rgba(255,255,255,.04)}.cell.hot{cursor:pointer}.cell.hot:active{transform:scale(.94)}
+.section{margin-top:14px}.section-title{font-size:12px;color:#c3ac90;letter-spacing:.12em;margin-bottom:7px}.tiles{display:flex;gap:8px;flex-wrap:wrap}.tile{width:46px;height:46px;border:1px solid #80684d;background:linear-gradient(#dfc9a2,#bea47c);color:#302116;border-radius:8px;font-weight:800;font-size:22px;box-shadow:0 3px 0 #765b3e;transition:.12s}.tile.selected{transform:translateY(2px);box-shadow:0 1px 0 #765b3e;outline:2px solid var(--teal)}.tile.used{opacity:.28;filter:grayscale(1);box-shadow:none}.tile:disabled{cursor:default}
+.wordbank{display:flex;gap:8px;flex-wrap:wrap}.wordchip{border:1px solid #785b40;background:#2b1b12;color:#eadbc4;border-radius:8px;padding:8px 11px;font-weight:700;letter-spacing:.08em}.wordchip.selected{outline:2px solid #a9b17d;background:#3a291b}.wordchip.placed{opacity:.55}.inventory{display:flex;align-items:center;gap:8px;min-height:46px}.inv-label{font-size:12px;color:var(--muted)}.inv-tile{width:42px;height:42px;border-radius:8px;border:1px solid var(--gold);background:#dcc39a;color:#312116;font-size:20px;font-weight:800}.inv-tile.selected{outline:3px solid var(--teal)}
+.stairs{margin:16px auto 2px;display:none;border:1px solid #9a7746;background:#3b2819;color:#f3d99c;padding:11px 18px;border-radius:10px;font-weight:700}.stairs.show{display:block}.meta{margin-top:14px;border-top:1px solid #654a36;padding-top:12px;display:none}.meta.show{display:block}.slots{display:flex;gap:6px;justify-content:center}.slot{width:36px;height:42px;border-bottom:2px solid #9a7955;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700}.hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#24150e;border:1px solid #76563d;color:#fff0d8;border-radius:10px;padding:10px 14px;opacity:0;pointer-events:none;transition:.2s;z-index:50;max-width:86vw;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:24px;z-index:60}.modal.show{display:flex}.modal-card{width:min(440px,100%);background:linear-gradient(#3b281c,#27180f);border:1px solid #79593f;border-radius:16px;padding:24px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.5)}.modal-card h2{margin:0 0 12px;font-size:20px}.modal-card p{white-space:pre-line;line-height:1.9;color:#eadcc7}.modal-card button{margin-top:12px;border:1px solid #8b6a3e;background:#48311e;color:#f5d99b;border-radius:9px;padding:9px 16px}.clear-title{font-size:28px;letter-spacing:.16em;color:#f0d18f}.tiny{font-size:11px;color:#9f8b76;margin-top:14px;text-align:center}
 @media(min-width:620px){:root{--cell:42px}.app{padding-top:28px}.panel{padding:18px}}
 </style>
 </head>
@@ -26,7 +26,7 @@ button{font:inherit}.app{max-width:760px;margin:auto;padding:18px 14px 80px}.tit
   <div class="panel">
     <div class="status"><div class="floorname" id="floorName"></div><div class="count" id="count"></div></div>
     <div class="board-wrap"><div class="board" id="board"></div></div>
-    <div class="section"><div class="section-title">漢字</div><div class="tiles" id="tiles"></div></div>
+    <div class="section"><div class="section-title">漢字</div><div class="tiles" id="tiles"></div></div><div class="section" id="wordsSection" style="display:none"><div class="section-title">変換されたことば</div><div class="wordbank" id="wordbank"></div></div>
     <div class="section" id="inventorySection" style="display:none"><div class="section-title">持ち物</div><div class="inventory"><div id="inventory"></div></div></div>
     <button class="stairs" id="stairs">階段を上る</button>
     <div class="meta" id="meta"><div class="slots" id="slots"></div></div>
@@ -84,10 +84,10 @@ const TILE_ORDER={
 4:['警','家','秘','門','地','殿','系','出','宝','報','神','下','口'],
 5:['祭','古','珠','予','下','光','壇','銭','出','玉','降','兆','脱']
 };
-const SAVE='kanjiDungeonPrototypeV2';
+const SAVE='kanjiDungeonPrototypeV3';
 let state=load()||{
- floor:1, unlocked:1, solved:{1:[],2:[],3:[],4:[],5:[]}, picked:{1:false,2:false,3:false,4:false,5:false},
- selected:[], inventory:[], invSelected:null, metaUnlocked:false, metaFound:[], rockRead:false, trap:false, swapped:false, finalRead:false, clear:false
+ floor:1, unlocked:1, formed:{1:[],2:[],3:[],4:[],5:[]}, placements:{1:{},2:{},3:{},4:{},5:{}}, picked:{1:false,2:false,3:false,4:false,5:false},
+ selected:[], selectedWord:null, inventory:[], invSelected:null, metaUnlocked:false, metaFound:[], rockRead:false, trap:false, swapped:false, finalRead:false, clear:false
 };
 let toastTimer=null;
 function save(){localStorage.setItem(SAVE,JSON.stringify(state))}
@@ -95,19 +95,38 @@ function load(){try{return JSON.parse(localStorage.getItem(SAVE))}catch(e){retur
 function cellsFor(word){return [...word.r].map((ch,i)=>({row:word.row+(word.d==='v'?i:0),col:word.col+(word.d==='h'?i:0),ch}))}
 function floorWord(f,id){return FLOORS[f].words.find(w=>w.id===id)}
 function effectiveWords(f){if(f!==4||!state.swapped)return FLOORS[f].words;return FLOORS[f].words.map(w=>w.id==='kakei'?{...w,k:'家財',r:'かざい'}:w)}
-function solvedWord(f,id){return state.solved[f].includes(id)}
-function floorComplete(f){return FLOORS[f].words.every(w=>solvedWord(f,w.id))}
+function wordDef(f,id){return effectiveWords(f).find(w=>w.id===id)}
+function slotDef(f,id){return FLOORS[f].words.find(w=>w.id===id)}
+function formedWord(f,id){return state.formed[f].includes(id)}
+function placedSlotForWord(f,wordId){return Object.keys(state.placements[f]).find(s=>state.placements[f][s]===wordId)||null}
+function targetCharMap(f){const out=new Map();effectiveWords(f).forEach(w=>cellsFor(w).forEach(x=>out.set(coordKey(x.row,x.col),x.ch)));return out}
+function floorComplete(f){
+ if(state.formed[f].length!==FLOORS[f].words.length)return false;
+ if(Object.keys(state.placements[f]).length!==FLOORS[f].words.length)return false;
+ const now=boardMap(f).map,target=targetCharMap(f);
+ for(const [k,ch] of target){const info=now.get(k);if(!info||!info.letters.length||info.letters[0].ch!==ch)return false}
+ return true
+}
 function allComplete(){return [1,2,3,4,5].every(f=>floorComplete(f))}
 function tileKanji(f){if(f===4&&state.swapped)return ['警','家','秘','門','地','殿','財','出','宝','報','神','下','口','系'];return TILE_ORDER[f].slice()}
-function usedKanji(f){const used=[];effectiveWords(f).forEach(w=>{if(solvedWord(f,w.id))[...w.k].forEach(c=>used.push(c))});return used}
+function usedKanji(f){const used=[];effectiveWords(f).forEach(w=>{if(formedWord(f,w.id))[...w.k].forEach(ch=>used.push(ch))});return used}
 function coordKey(r,c){return r+','+c}
-function boardMap(f){const map=new Map(), counts=new Map();effectiveWords(f).forEach(w=>{cellsFor(w).forEach(x=>{const k=coordKey(x.row,x.col);if(!map.has(k))map.set(k,{ch:x.ch,ids:[w.id]});else map.get(k).ids.push(w.id);counts.set(k,(counts.get(k)||0)+1)})});return {map,counts}}
+function boardMap(f){
+ const map=new Map(),counts=new Map();
+ FLOORS[f].words.forEach(slot=>{const len=[...slot.r].length;for(let i=0;i<len;i++){const row=slot.row+(slot.d==='v'?i:0),col=slot.col+(slot.d==='h'?i:0),k=coordKey(row,col);if(!map.has(k))map.set(k,{slotIds:[],letters:[]});map.get(k).slotIds.push(slot.id);counts.set(k,(counts.get(k)||0)+1)}});
+ Object.entries(state.placements[f]).forEach(([slotId,wordId])=>{const slot=slotDef(f,slotId),word=wordDef(f,wordId);if(!slot||!word)return;[...word.r].forEach((ch,i)=>{const row=slot.row+(slot.d==='v'?i:0),col=slot.col+(slot.d==='h'?i:0),info=map.get(coordKey(row,col));if(info)info.letters.push({slotId,wordId,ch})})});
+ return {map,counts}
+}
+function canPlaceInSlot(f,slotId,wordId){
+ const slot=slotDef(f,slotId),word=wordDef(f,wordId);if(!slot||!word||state.placements[f][slotId])return false;if([...slot.r].length!==[...word.r].length)return false;
+ const {map}=boardMap(f);for(let i=0;i<[...word.r].length;i++){const row=slot.row+(slot.d==='v'?i:0),col=slot.col+(slot.d==='h'?i:0),info=map.get(coordKey(row,col)),ch=[...word.r][i];if(info&&info.letters.some(x=>x.ch!==ch))return false}return true
+}
 function render(){renderTabs();renderFloor();save()}
 function renderTabs(){const tabs=document.getElementById('tabs');tabs.innerHTML='';for(let f=1;f<=state.unlocked;f++){const b=document.createElement('button');b.className='tab'+(state.floor===f?' active':'');b.textContent=f+'F';b.onclick=()=>{state.floor=f;state.selected=[];render()};tabs.appendChild(b)}}
-function renderFloor(){const f=state.floor;document.getElementById('floorName').textContent=FLOORS[f].name;document.getElementById('count').textContent=`${state.solved[f].length} / 6`;renderBoard(f);renderTiles(f);renderInventory();renderStairs(f);renderMeta()}
+function renderFloor(){const f=state.floor;document.getElementById('floorName').textContent=FLOORS[f].name;document.getElementById('count').textContent='熟語 '+state.formed[f].length+' / 6 ・ 配置 '+Object.keys(state.placements[f]).length+' / 6';renderBoard(f);renderTiles(f);renderWordBank(f);renderInventory();renderStairs(f);renderMeta()} / 6`;renderBoard(f);renderTiles(f);renderInventory();renderStairs(f);renderMeta()}
 function renderBoard(f){const board=document.getElementById('board');board.innerHTML='';const {map,counts}=boardMap(f);for(let r=1;r<=11;r++)for(let c=1;c<=11;c++){
   const d=document.createElement('div');d.className='cell';const k=coordKey(r,c);const info=map.get(k);
-  if(info){d.classList.add('path');if((counts.get(k)||0)>1)d.classList.add('cross');const visible=info.ids.some(id=>solvedWord(f,id));d.textContent=visible?info.ch:'';if(!visible)d.classList.add('emptytext');
+  if(info){d.classList.add('path');if((counts.get(k)||0)>1)d.classList.add('cross');const visible=info.ids.some(id=>formedWord(f,id));d.textContent=visible?info.ch:'';if(!visible)d.classList.add('emptytext');
     const meta=META.find(m=>m.f===f&&m.row===r&&m.col===c);if(state.metaUnlocked&&meta){d.dataset.num=['','①','②','③','④','⑤','⑥','⑦'][meta.n];d.classList.add('meta-ready','hot');d.onclick=()=>collectMeta(meta)}
     if(f===4 && state.trap && info.ids.includes('kakei')){d.classList.add('hot');d.onclick=()=>trySwap()}
     if(f===4 && state.rockRead && !state.trap && info.ids.includes('keihou')){d.classList.add('hot');d.onclick=()=>triggerTrap()}
@@ -126,16 +145,31 @@ function renderTiles(f){const holder=document.getElementById('tiles');holder.inn
   else{b.onclick=()=>selectTile(ch)}
   if(state.selected.includes(ch))b.classList.add('selected');holder.appendChild(b)
 })}
-function selectTile(ch){if(state.selected.includes(ch)){state.selected=state.selected.filter(x=>x!==ch);render();return}state.selected.push(ch);if(state.selected.length===2){const pair=state.selected.join('');const w=FLOORS[state.floor].words.find(x=>x.k===pair&&!solvedWord(state.floor,x.id));if(w){state.solved[state.floor].push(w.id);toast(`${w.k} → ${w.r}`);state.selected=[];if(floorComplete(state.floor)){setTimeout(()=>onFloorComplete(state.floor),250)}}else{toast('その組み合わせではないようだ');state.selected=[]}}render()}
+function selectTile(ch){
+ if(state.selected.includes(ch)){state.selected=state.selected.filter(x=>x!==ch);render();return}
+ state.selected.push(ch);
+ if(state.selected.length===2){
+  const pair=state.selected.join('');const w=FLOORS[state.floor].words.find(x=>x.k===pair&&!formedWord(state.floor,x.id));
+  if(w){state.formed[state.floor].push(w.id);state.selectedWord=w.id;toast(w.k+' → '+w.r+'　置く場所を選ぶ');state.selected=[]}
+  else{toast('その組み合わせではないようだ');state.selected=[]}
+ }
+ render()
+}
 function onFloorComplete(f){if(f===5){if(allComplete()&&!state.metaUnlocked){state.metaUnlocked=true;modal('……どこかで、音がした。','');render()}}else{render()}}
 function renderStairs(f){const s=document.getElementById('stairs');const can=floorComplete(f)&&f<5&&state.unlocked===f;s.classList.toggle('show',can);s.onclick=()=>{state.unlocked=Math.max(state.unlocked,f+1);state.floor=f+1;state.selected=[];toast('階段が現れた');render()}}
 function pickLoose(f,ch){if(!floorComplete(f))return;state.picked[f]=true;if(!state.inventory.includes(ch))state.inventory.push(ch);toast(`${ch} を拾った`);render()}
+function renderWordBank(f){
+ const sec=document.getElementById('wordsSection'),holder=document.getElementById('wordbank');holder.innerHTML='';sec.style.display=state.formed[f].length?'block':'none';
+ state.formed[f].forEach(id=>{const w=wordDef(f,id),slot=placedSlotForWord(f,id),b=document.createElement('button');b.className='wordchip'+(state.selectedWord===id?' selected':'')+(slot?' placed':'');b.textContent=w.r;
+  b.onclick=()=>{if(slot){delete state.placements[f][slot];state.selectedWord=id;toast(w.r+' を外した')}else state.selectedWord=state.selectedWord===id?null:id;render()};holder.appendChild(b)
+ })
+}
 function renderInventory(){const sec=document.getElementById('inventorySection'),holder=document.getElementById('inventory');holder.innerHTML='';sec.style.display=state.inventory.length?'block':'none';state.inventory.forEach(ch=>{const b=document.createElement('button');b.className='inv-tile'+(state.invSelected===ch?' selected':'');b.textContent=ch;b.onclick=()=>{state.invSelected=state.invSelected===ch?null:ch;render()};holder.appendChild(b)})}
 function renderMeta(){const box=document.getElementById('meta'),slots=document.getElementById('slots');box.classList.toggle('show',state.metaUnlocked&&state.metaFound.length>0);slots.innerHTML='';for(let n=1;n<=7;n++){const m=META.find(x=>x.n===n);const s=document.createElement('div');s.className='slot';s.textContent=state.metaFound.includes(n)?m.ch:'';slots.appendChild(s)}}
 function collectMeta(m){if(!state.metaUnlocked)return;if(!state.metaFound.includes(m.n)){state.metaFound.push(m.n);state.metaFound.sort((a,b)=>a-b);toast(`${['','①','②','③','④','⑤','⑥','⑦'][m.n]} ${m.ch}`);render()}}
 function readRock(){if(!state.metaUnlocked){toast('硬い岩だ');return}if(state.metaFound.length<7){toast('硬い岩だ');return}if(state.swapped){state.finalRead=true;toast('岩の下を、もう一度確かめる');}else{state.rockRead=true;toast('岩の下へ、空洞が続いている');}render()}
 function triggerTrap(){if(state.trap)return;state.trap=true;modal('警報が鳴り響いた！','足元が崩れた。\n\n気がつくと、1Fまで落とされていた。',()=>{state.floor=1;render()});render()}
-function trySwap(){if(!state.trap||state.swapped)return;if(state.invSelected!=='財'){toast('何か使えそうなものがあれば……');return}if(!state.inventory.includes('財'))return;state.inventory=state.inventory.filter(x=>x!=='財');state.invSelected=null;state.swapped=true;toast('家系 → 家財');modal('家財','「系」を外し、「財」をはめた。');render()}
+function trySwap(){if(!state.trap||state.swapped)return;if(state.invSelected!=='財'){toast('何か使えそうなものがあれば……');return}if(!state.inventory.includes('財'))return;state.inventory=state.inventory.filter(x=>x!=='財');state.invSelected=null;state.swapped=true;state.finalRead=true;toast('家系 → 家財');modal('家財','「系」を外し、「財」をはめた。');render()}
 function finishGame(){if(state.clear)return;state.clear=true;modal('財宝を見つけた！','上へ上へと進んだ末、宝は最初の階に眠っていた。\n\nCLEAR');render()}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1500)}
 function modal(title,text,after){const m=document.getElementById('modal');document.getElementById('modalTitle').textContent=title;document.getElementById('modalText').textContent=text||'';m.classList.add('show');const btn=document.getElementById('modalBtn');btn.onclick=()=>{m.classList.remove('show');if(after)after()}}
