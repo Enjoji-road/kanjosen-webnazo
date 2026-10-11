@@ -29,7 +29,7 @@
 <div id="platform" class="platform wait"><div id="train" class="train"></div></div><div class="rail"></div>
 </section>
 </div>
-<section id="ending" class="card end hidden"><div id="endBadge" class="kicker"></div><h2>またね。</h2><div id="stamp" class="stamp hidden">5号車 乗車済</div><p id="endText"></p><button id="revisit" class="secondary">第3問から再乗車</button> <button id="reset2" class="secondary">最初から</button></section>
+<section id="ending" class="card end hidden"><div id="endBadge" class="kicker"></div><h2>またね。</h2><div id="stamp" class="stamp hidden">5号車 乗車済</div><p id="endText"></p><button id="shareX" class="primary">Xで共有する</button><br><br><button id="revisit" class="secondary">第3問から再乗車</button> <button id="reset2" class="secondary">最初から</button></section>
 <div class="foot"><button id="reset" style="background:none;border:0;color:inherit;text-decoration:underline">最初から遊ぶ</button></div>
 </div>
 <div id="dlg" class="dialog hidden"><div class="box"><div id="dk" class="kick"></div><h2 id="dt"></h2><p id="db"></p><button id="dgo" class="primary" style="width:100%">戻る</button></div></div>
@@ -79,12 +79,13 @@ if(a===z.a){
 if(z.q3&&state.q.some(function(x){return x.m==='C'&&x.s===9&&x.c===4}))state.secret=true;
 if(z.extra)state.c=true;
 if(z.final){reveal();return}
-dialog('発券完了',z.w,z.d||'',function(){state.s++;state.q=[];if(state.s===1)state.m='B';if(state.s===2)state.m='A';if(state.s===3)state.m='C';if(state.s===6)state.m='A';back=false;save();render()});save();return}
+dialog('発券完了',z.w,z.d||'',function(){state.s++;state.q=[];state.st=0;state.stopped=true;if(state.s===1)state.m='B';if(state.s===2)state.m='A';if(state.s===3)state.m='C';if(state.s===6)state.m='A';back=false;save();render()});save();return}
 if(a==='ずる'){dialog('別の行き先','「ずる」を確認しました。','言葉としては成立しています。\nでも、今回の目的地ではありません。');return}
 dialog('照合結果','行き先を確認できませんでした。','')
 }
 function reveal(){var f=['■■■','ま■■','また■','またね'],i=0;$('reveal').classList.remove('hidden');function go(){$('rv').textContent=f[i++];if(i<f.length)setTimeout(go,700);else setTimeout(function(){$('reveal').classList.add('hidden');state.end=true;state.q=[];save();render()},1000)}go()}
 function end(){var tr=state.secret;$('endBadge').textContent=tr?'SECRET JOURNEY / TRUE END':'JOURNEY COMPLETED / NORMAL END';$('stamp').classList.toggle('hidden',!tr);$('endText').textContent=tr?'最後まで、この列車に乗ってくれてありがとう。\n\nそして、この環状線に隠された小さな秘密まで、見つけてくれてありがとう。\n\n誰も乗らないと思っていた5号車にも、あなたは乗ってくれました。\n\nいつかまた、どこかの謎で会いましょう。':'最後まで、この列車に乗ってくれてありがとう。\n\nこの旅が、あなたにとって少しでも楽しい時間になっていたら嬉しいです。\n\nいつかまた、どこかの謎で会いましょう。'}
+$('shareX').onclick=function(){var msg=tr?'Web謎「環状線」の小さな秘密まで見つけました🚃✨':'Web謎「環状線」をクリアしました🚃';var url='https://enjoji-road.github.io/kanjosen-webnazo/';var text=msg+'\n\n#環状線Web謎\n'+url;window.open('https://x.com/intent/post?text='+encodeURIComponent(text),'_blank','noopener,noreferrer')};
 document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){
 var m=b.dataset.mode;if(m==='C'&&!state.c)return;
 var z=q();
