@@ -123,18 +123,51 @@ function canPlaceInSlot(f,slotId,wordId){
 }
 function render(){renderTabs();renderFloor();save()}
 function renderTabs(){const tabs=document.getElementById('tabs');tabs.innerHTML='';for(let f=1;f<=state.unlocked;f++){const b=document.createElement('button');b.className='tab'+(state.floor===f?' active':'');b.textContent=f+'F';b.onclick=()=>{state.floor=f;state.selected=[];render()};tabs.appendChild(b)}}
-function renderFloor(){const f=state.floor;document.getElementById('floorName').textContent=FLOORS[f].name;document.getElementById('count').textContent='熟語 '+state.formed[f].length+' / 6 ・ 配置 '+Object.keys(state.placements[f]).length+' / 6';renderBoard(f);renderTiles(f);renderWordBank(f);renderInventory();renderStairs(f);renderMeta()} / 6`;renderBoard(f);renderTiles(f);renderInventory();renderStairs(f);renderMeta()}
-function renderBoard(f){const board=document.getElementById('board');board.innerHTML='';const {map,counts}=boardMap(f);for(let r=1;r<=11;r++)for(let c=1;c<=11;c++){
-  const d=document.createElement('div');d.className='cell';const k=coordKey(r,c);const info=map.get(k);
-  if(info){d.classList.add('path');if((counts.get(k)||0)>1)d.classList.add('cross');const visible=info.ids.some(id=>formedWord(f,id));d.textContent=visible?info.ch:'';if(!visible)d.classList.add('emptytext');
-    const meta=META.find(m=>m.f===f&&m.row===r&&m.col===c);if(state.metaUnlocked&&meta){d.dataset.num=['','①','②','③','④','⑤','⑥','⑦'][meta.n];d.classList.add('meta-ready','hot');d.onclick=()=>collectMeta(meta)}
-    if(f===4 && state.trap && info.ids.includes('kakei')){d.classList.add('hot');d.onclick=()=>trySwap()}
-    if(f===4 && state.rockRead && !state.trap && info.ids.includes('keihou')){d.classList.add('hot');d.onclick=()=>triggerTrap()}
-    if(f===1 && state.finalRead && info.ids.includes('zaihou')){d.classList.add('hot');d.onclick=()=>finishGame()}
+function renderFloor(){
+ const f=state.floor;
+ document.getElementById('floorName').textContent=FLOORS[f].name;
+ document.getElementById('count').textContent='熟語 '+state.formed[f].length+' / 6 ・ 配置 '+Object.keys(state.placements[f]).length+' / 6';
+ renderBoard(f);renderTiles(f);renderWordBank(f);renderInventory();renderStairs(f);renderMeta()
+}
+function renderBoard(f){
+ const board=document.getElementById('board');board.innerHTML='';const {map,counts}=boardMap(f);
+ for(let r=1;r<=11;r++)for(let col=1;col<=11;col++){
+  const d=document.createElement('div');d.className='cell';const info=map.get(coordKey(r,col));
+  if(info){
+   d.classList.add('path');if((counts.get(coordKey(r,col))||0)>1)d.classList.add('cross');
+   d.textContent=info.letters.length?info.letters[0].ch:'';if(!info.letters.length)d.classList.add('emptytext');
+   const meta=META.find(m=>m.f===f&&m.row===r&&m.col===col);
+   if(state.metaUnlocked&&meta){d.dataset.num=['','①','②','③','④','⑤','⑥','⑦'][meta.n];d.classList.add('meta-ready')}
+   d.classList.add('hot');d.onclick=()=>handleCellClick(f,r,col,info);
   }
-  if(f===5 && r===6&&c===6){d.className='cell rock';d.textContent='岩';d.onclick=readRock}
+  if(f===5&&r===6&&col===6){d.className='cell rock';d.textContent='岩';d.onclick=readRock}
   board.appendChild(d)
-}}
+ }
+}
+function wordsPlacedAtCell(f,info){return [...new Set(info.slotIds.map(s=>state.placements[f][s]).filter(Boolean))]}
+function handleCellClick(f,row,col,info){
+ const meta=META.find(m=>m.f===f&&m.row===row&&m.col===col);
+ if(state.metaUnlocked&&meta&&!state.metaFound.includes(meta.n)){collectMeta(meta);return}
+ if(state.selectedWord){placeSelectedAtCell(f,info);return}
+ const placedWords=wordsPlacedAtCell(f,info);
+ if(f===4&&state.rockRead&&!state.trap&&placedWords.includes('keihou')){triggerTrap();return}
+ if(f===4&&state.trap&&!state.swapped&&placedWords.includes('kakei')){trySwap();return}
+ if(f===1&&state.trap&&state.swapped&&placedWords.includes('zaihou')){finishGame();return}
+ if(placedWords.length===1){
+  const wordId=placedWords[0],slotId=placedSlotForWord(f,wordId);
+  if(slotId){delete state.placements[f][slotId];state.selectedWord=wordId;toast(wordDef(f,wordId).r+' を外した');render()}
+ }else if(placedWords.length>1)toast('外すなら、交差していないマスを選んでください')
+}
+function placeSelectedAtCell(f,info){
+ const wordId=state.selectedWord,word=wordDef(f,wordId);if(!word)return;
+ const candidates=info.slotIds.filter(slotId=>canPlaceInSlot(f,slotId,wordId));
+ if(candidates.length===0){toast('そこには入らないようだ');return}
+ if(candidates.length>1){toast('横か縦か分かるマスを選んでください');return}
+ state.placements[f][candidates[0]]=wordId;state.selectedWord=null;toast(word.r+' を埋めた');
+ if(Object.keys(state.placements[f]).length===6&&!floorComplete(f))setTimeout(()=>toast('まだどこか違うようだ'),250);
+ if(floorComplete(f))setTimeout(()=>onFloorComplete(f),250);
+ render()
+}
 function renderTiles(f){const holder=document.getElementById('tiles');holder.innerHTML='';const used=usedKanji(f);tileKanji(f).forEach(ch=>{
   if(state.picked[f]&&ch===FLOORS[f].extra)return;
   const b=document.createElement('button');b.className='tile';b.textContent=ch;const isUsed=used.includes(ch);
