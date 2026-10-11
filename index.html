@@ -85,21 +85,24 @@ if(a==='ずる'){dialog('別の行き先','「ずる」を確認しました。'
 dialog('照合結果','行き先を確認できませんでした。','')
 }
 function reveal(){var f=['■■■','ま■■','また■','またね'],i=0;$('reveal').classList.remove('hidden');function go(){$('rv').textContent=f[i++];if(i<f.length)setTimeout(go,700);else setTimeout(function(){$('reveal').classList.add('hidden');state.end=true;state.q=[];save();render()},1000)}go()}
-function end(){var tr=state.secret;$('endBadge').textContent=tr?'SECRET JOURNEY / TRUE END':'JOURNEY COMPLETED / NORMAL END';$('stamp').classList.toggle('hidden',!tr);$('endText').textContent=tr?'最後まで、この列車に乗ってくれてありがとう。\n\nそして、この環状線に隠された小さな秘密まで、見つけてくれてありがとう。\n\n誰も乗らないと思っていた5号車にも、あなたは乗ってくれました。\n\nいつかまた、どこかの謎で会いましょう。':'最後まで、この列車に乗ってくれてありがとう。\n\nこの旅が、あなたにとって少しでも楽しい時間になっていたら嬉しいです。\n\nいつかまた、どこかの謎で会いましょう。'}
-var msg=tr?'Web謎「環状線」の小さな秘密まで見つけました🚃✨':'Web謎「環状線」をクリアしました🚃';
-var url='https://enjoji-road.github.io/kanjosen-webnazo/';
-$('shareX').onclick=async function(){
-  var shareText=msg+'\n\n'+url;
+function end(){
+var tr=state.secret;
+$('endBadge').textContent=tr?'SECRET JOURNEY / TRUE END':'JOURNEY COMPLETED / NORMAL END';
+$('stamp').classList.toggle('hidden',!tr);
+$('endText').textContent=tr?'最後まで、この列車に乗ってくれてありがとう。\n\nそして、この環状線に隠された小さな秘密まで、見つけてくれてありがとう。\n\n誰も乗らないと思っていた5号車にも、あなたは乗ってくれました。\n\nいつかまた、どこかの謎で会いましょう。':'最後まで、この列車に乗ってくれてありがとう。\n\nこの旅が、あなたにとって少しでも楽しい時間になっていたら嬉しいです。\n\nいつかまた、どこかの謎で会いましょう。';
+$('shareX').onclick=function(){
+  var msg=state.secret?'Web謎「環状線」の小さな秘密まで見つけました🚃✨':'Web謎「環状線」をクリアしました🚃';
+  var url='https://enjoji-road.github.io/kanjosen-webnazo/';
+  var fallback=function(){window.location.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(msg+'\n\n'+url)};
   if(navigator.share){
-    try{
-      await navigator.share({text:msg,url:url});
-      return;
-    }catch(e){
-      if(e&&e.name==='AbortError')return;
-    }
+    navigator.share({text:msg,url:url}).catch(function(e){
+      if(!e||e.name!=='AbortError')fallback();
+    });
+  }else{
+    fallback();
   }
-  window.location.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText);
 };
+}
 document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){
 var m=b.dataset.mode;if(m==='C'&&!state.c)return;
 var z=q();
