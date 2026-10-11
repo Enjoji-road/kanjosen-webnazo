@@ -28,7 +28,7 @@
 <div id="platform" class="platform wait"><div id="train" class="train"></div></div><div class="rail"></div>
 </section>
 </div>
-<section id="ending" class="card end hidden"><div id="endBadge" class="kicker"></div><h2>またね。</h2><div id="stamp" class="stamp hidden">5号車 乗車済</div><p id="endText"></p><button id="shareX" class="primary">Xで共有する</button><br><br><button id="revisit" class="secondary">第3問から再乗車</button> <button id="reset2" class="secondary">最初から</button></section>
+<section id="ending" class="card end hidden"><div id="endBadge" class="kicker"></div><h2>またね。</h2><div id="stamp" class="stamp hidden">5号車 乗車済</div><p id="endText"></p><button id="shareX" class="primary">Xで共有する</button><br><br><button id="revisit" class="secondary">第5問から再乗車</button> <button id="reset2" class="secondary">最初から</button></section>
 <div class="foot"><button id="reset" style="background:none;border:0;color:inherit;text-decoration:underline">最初から遊ぶ</button></div>
 </div>
 <div id="dlg" class="dialog hidden"><div class="box"><div id="dk" class="kick"></div><h2 id="dt"></h2><p id="db"></p><button id="dgo" class="primary" style="width:100%">閉じる</button></div></div>
@@ -44,10 +44,9 @@ var Q=[
 {n:'QUESTION 01',name:'はじめての乗車',p:'さあ、列車に乗って「たび」に出よう。',l:2,a:'たび',w:'ご乗車を確認しました。'},
 {n:'QUESTION 02',name:'次の乗車券',p:'切符を持って、まず通る場所。\nか□□□',l:4,a:'かいさつ',w:'改札を通過しました。'},
 {n:'EXTRA TICKET',name:'まだ有効な切符',p:'次の列車を呼び出してください。\nつ□',l:2,a:'つぎ',w:'新しい車両が到着します。',extra:1},
-{n:'QUESTION 03',name:'その先へ',p:'この旅は、まだ終わらない。\nつ□□',l:3,a:'つづき',w:'旅は続きます。',q3:1},
-{n:'QUESTION 04',name:'運行中',p:'終点のない線路を、ぐるりと。\nま□□',l:3,a:'まわる',w:'列車は走り続けます。'},
-{n:'QUESTION 05',name:'到着',p:'目的地に到着しました。\nお□□',l:3,a:'おりる',w:'降車を確認しました。'},
-{n:'QUESTION 06',name:'改札',p:'改札が開かない。\n困った……\nえ□□□を呼ぼう。',l:4,a:'えきいん',w:'駅員が到着しました。',d:'改札が開きます。',gate:1},
+{n:'QUESTION 03',name:'運行中',p:'終点のない線路を、ぐるりと。\nま□□',l:3,a:'まわる',w:'列車は走り続けます。'},
+{n:'QUESTION 04',name:'到着',p:'目的地に到着しました。\nお□□',l:3,a:'おりる',w:'降車を確認しました。'},
+{n:'QUESTION 05',name:'改札',p:'改札が開かない。\n困った……\nえ□□□を呼ぼう。',l:4,a:'えきいん',w:'駅員が到着しました。',d:'改札が開きます。',gate:1},
 {n:'FINAL QUESTION',name:'終点のない旅',p:'この列車に、終点はない。\nいつかまた、ここで会えるから。\n「さようなら」の代わりに、3文字の言葉を。\nま□□',l:3,a:'またね',final:1}];
 var key='kanjosen-pages-test-v1';
 var init={s:0,m:'A',st:0,stopped:false,q:[],c:false,secret:false,end:false,primed:false,metaIndex:0};
@@ -76,7 +75,7 @@ $('dgo').onclick=function(){$('dlg').classList.add('hidden');var f=cb;cb=null;if
 function submit(){
 var z=q();if(state.q.length!==z.l)return;var a=state.q.map(function(x){return x.v}).join('');
 if(a===z.a){
-if(z.q3&&state.q.some(function(x){return x.m==='C'&&x.s===9&&x.c===4}))state.secret=true;
+if(z.gate&&state.q.some(function(x){return x.m==='C'&&x.s===9&&x.c===4}))state.secret=true;
 if(z.extra)state.c=true;
 if(z.final){reveal();return}
 dialog('発券完了',z.w,z.d||'',function(){state.s++;state.q=[];state.st=0;state.stopped=true;state.primed=false;state.metaIndex=0;save();render()});save();return}
@@ -124,7 +123,7 @@ if(state.q.length<q().l){
 }});
 $('undo').onclick=function(){state.q.pop();render()};$('submit').onclick=submit;
 function reset(){if(confirm('最初から遊びますか？')){state=Object.assign({},init);save();render()}}
-$('reset').onclick=reset;$('reset2').onclick=reset;$('revisit').onclick=function(){state.s=3;state.end=false;state.m='C';state.st=9;state.stopped=true;state.q=[];state.primed=false;state.metaIndex=0;save();render();window.scrollTo(0,0)};
+$('reset').onclick=reset;$('reset2').onclick=reset;$('revisit').onclick=function(){state.s=5;state.end=false;state.m='C';state.st=9;state.stopped=true;state.q=[];state.primed=false;state.metaIndex=0;save();render();window.scrollTo(0,0)};
 render();
 })();
 </script>
