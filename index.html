@@ -47,7 +47,7 @@ var Q=[
 {n:'EXTRA TICKET',name:'まだ有効な切符',p:'次の列車を呼び出してください。',l:2,a:'つぎ',w:'新しい車両が到着します。',extra:1},
 {n:'QUESTION 03',name:'新しい車両',p:'新しく到着した車両が示すものは？',l:2,a:'つき',w:'正体を確認しました。',q3:1},
 {n:'QUESTION 04',name:'到着',p:'目的地に到着しました。',l:4,a:'おります',w:'降車を確認しました。'},
-{n:'FINAL TICKET',name:'最終乗車券',p:'有効期限：12',l:3,a:'しわす',w:'最終乗車券が有効になりました。',finalticket:1},
+{n:'QUESTION 05',name:'改札',p:'改札が開かないようだ。\n困った……',l:4,a:'えきいん',w:'駅員が到着しました。',d:'改札が開きます。',gate:1},
 {n:'FINAL QUESTION',name:'終点のない旅',p:'この列車に、終点はない。\nいつかまた、ここで会えるから。\n「さようなら」の代わりに、3文字の言葉を。',l:3,a:'またね',final:1}];
 var key='kanjosen-pages-test-v1';
 var init={s:0,m:'A',st:0,stopped:false,q:[],c:false,secret:false,end:false};
@@ -62,7 +62,7 @@ for(var i=0;i<12;i++)station(i);
 function cars(){var t=$('train');t.innerHTML='';for(var i=0;i<5;i++){(function(i){var x=ch(state.m,state.st,i),b=document.createElement('button');b.className='car'+(x?'':' blank');b.disabled=!x;b.innerHTML='<span style="position:absolute;bottom:5px;left:0;right:0">'+(i+1)+'号車</span>';if(x)b.onclick=function(){if(state.q.length<q().l){state.q.push({m:state.m,s:state.st,c:i,v:x});render()}};t.appendChild(b)})(i)}}
 function render(){
 if(state.end){$('game').classList.add('hidden');$('ending').classList.remove('hidden');end();return}else{$('game').classList.remove('hidden');$('ending').classList.add('hidden')}
-var z=q();$('qn').textContent=z.n;$('qname').textContent=z.name;$('no').textContent='NO. '+String(state.s+1).padStart(2,'0');$('prompt').textContent=z.p;$('ticketType').textContent=(z.finalticket||z.final)?'環状鉄道　最終乗車券':'環状鉄道　乗車券';$('submit').textContent=z.finalticket?'有効化する':'発券する';
+var z=q();$('qn').textContent=z.n;$('qname').textContent=z.name;$('no').textContent='NO. '+String(state.s+1).padStart(2,'0');$('prompt').textContent=z.p;$('ticketType').textContent=z.final?'環状鉄道　最終乗車券':'環状鉄道　乗車券';$('submit').textContent='発券する';
 document.querySelectorAll('.station').forEach(function(b,i){b.classList.toggle('active',state.stopped&&i===state.st)});
 document.querySelectorAll('.mode').forEach(function(b){var m=b.dataset.mode;b.classList.toggle('hidden',m==='C'&&!state.c);b.classList.toggle('active',m===state.m)});
 $('platform').classList.toggle('wait',!state.stopped);cars();
@@ -79,13 +79,21 @@ if(a===z.a){
 if(z.q3&&state.q.some(function(x){return x.m==='C'&&x.s===9&&x.c===4}))state.secret=true;
 if(z.extra)state.c=true;
 if(z.final){reveal();return}
-dialog('発券完了',z.w,'',function(){state.s++;state.q=[];if(state.s===1)state.m='B';if(state.s===2)state.m='A';if(state.s===3)state.m='C';if(state.s===6)state.m='A';back=false;save();render()});save();return}
+dialog('発券完了',z.w,z.d||'',function(){state.s++;state.q=[];if(state.s===1)state.m='B';if(state.s===2)state.m='A';if(state.s===3)state.m='C';if(state.s===6)state.m='A';back=false;save();render()});save();return}
 if(a==='ずる'){dialog('別の行き先','「ずる」を確認しました。','言葉としては成立しています。\nでも、今回の目的地ではありません。');return}
 dialog('照合結果','行き先を確認できませんでした。','')
 }
 function reveal(){var f=['■■■','ま■■','また■','またね'],i=0;$('reveal').classList.remove('hidden');function go(){$('rv').textContent=f[i++];if(i<f.length)setTimeout(go,700);else setTimeout(function(){$('reveal').classList.add('hidden');state.end=true;state.q=[];save();render()},1000)}go()}
 function end(){var tr=state.secret;$('endBadge').textContent=tr?'SECRET JOURNEY / TRUE END':'JOURNEY COMPLETED / NORMAL END';$('stamp').classList.toggle('hidden',!tr);$('endText').textContent=tr?'最後まで、この列車に乗ってくれてありがとう。\n\nそして、この環状線に隠された小さな秘密まで、見つけてくれてありがとう。\n\n誰も乗らないと思っていた5号車にも、あなたは乗ってくれました。\n\nいつかまた、どこかの謎で会いましょう。':'最後まで、この列車に乗ってくれてありがとう。\n\nこの旅が、あなたにとって少しでも楽しい時間になっていたら嬉しいです。\n\nいつかまた、どこかの謎で会いましょう。'}
-document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){if(b.dataset.mode==='C'&&!state.c)return;state.m=b.dataset.mode;render();save()}});
+document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){
+var m=b.dataset.mode;if(m==='C'&&!state.c)return;
+var z=q();
+if(z.gate&&m==='A'&&state.m==='A'){
+  if(state.q.length<z.l){state.q.push({m:'A',s:-1,c:-1,v:'え',special:true});render()}
+  return;
+}
+state.m=m;render();save()
+}});
 $('undo').onclick=function(){state.q.pop();render()};$('submit').onclick=submit;$('toBack').onclick=function(){back=true;render()};$('toFront').onclick=function(){back=false;render()};
 function reset(){if(confirm('最初から遊びますか？')){state=Object.assign({},init);back=false;save();render()}}
 $('reset').onclick=reset;$('reset2').onclick=reset;$('revisit').onclick=function(){state.s=3;state.end=false;state.m='C';state.st=9;state.stopped=true;state.q=[];back=false;save();render();window.scrollTo(0,0)};
