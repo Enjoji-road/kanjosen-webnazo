@@ -46,8 +46,9 @@ var Q=[
 {n:'QUESTION 02',name:'次の乗車券',p:'切符を持って、まず通る場所。',l:4,a:'かいさつ',w:'改札を通過しました。'},
 {n:'EXTRA TICKET',name:'まだ有効な切符',p:'次の列車を呼び出してください。',l:2,a:'つぎ',w:'新しい車両が到着します。',extra:1},
 {n:'QUESTION 03',name:'その先へ',p:'この旅は、まだ終わらない。',l:3,a:'つづき',w:'旅は続きます。',q3:1},
-{n:'QUESTION 04',name:'到着',p:'目的地に到着しました。',l:3,a:'おりる',w:'降車を確認しました。'},
-{n:'QUESTION 05',name:'改札',p:'改札が開かないようだ。\n困った……',l:4,a:'えきいん',w:'駅員が到着しました。',d:'改札が開きます。',gate:1},
+{n:'QUESTION 04',name:'運行中',p:'終点のない線路を、ぐるりと。',l:3,a:'まわる',w:'列車は走り続けます。'},
+{n:'QUESTION 05',name:'到着',p:'目的地に到着しました。',l:3,a:'おりる',w:'降車を確認しました。'},
+{n:'QUESTION 06',name:'改札',p:'改札が開かないようだ。\n困った……',l:4,a:'えきいん',w:'駅員が到着しました。',d:'改札が開きます。',gate:1},
 {n:'FINAL QUESTION',name:'終点のない旅',p:'この列車に、終点はない。\nいつかまた、ここで会えるから。\n「さようなら」の代わりに、3文字の言葉を。',l:3,a:'またね',final:1}];
 var key='kanjosen-pages-test-v1';
 var init={s:0,m:'A',st:0,stopped:false,q:[],c:false,secret:false,end:false};
@@ -80,7 +81,7 @@ if(a===z.a){
 if(z.q3&&state.q.some(function(x){return x.m==='C'&&x.s===9&&x.c===4}))state.secret=true;
 if(z.extra)state.c=true;
 if(z.final){reveal();return}
-dialog('発券完了',z.w,z.d||'',function(){state.s++;state.q=[];state.st=0;state.stopped=true;if(state.s===1)state.m='B';if(state.s===2)state.m='A';if(state.s===3)state.m='C';if(state.s===6)state.m='A';back=false;save();render()});save();return}
+dialog('発券完了',z.w,z.d||'',function(){state.s++;state.q=[];state.st=0;state.stopped=true;if(state.s===1)state.m='B';if(state.s===2)state.m='A';if(state.s===3)state.m='C';if(state.s===7)state.m='A';back=false;save();render()});save();return}
 if(a==='ずる'){dialog('別の行き先','「ずる」を確認しました。','言葉としては成立しています。\nでも、今回の目的地ではありません。');return}
 dialog('照合結果','行き先を確認できませんでした。','')
 }
