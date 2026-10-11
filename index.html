@@ -29,7 +29,7 @@
 <div id="platform" class="platform wait"><div id="train" class="train"></div></div><div class="rail"></div>
 </section>
 </div>
-<section id="ending" class="card end hidden"><div id="endBadge" class="kicker"></div><h2>またね。</h2><div id="stamp" class="stamp hidden">5号車 乗車済</div><p id="endText"></p><a id="shareX" class="primary" href="#" style="display:inline-block;text-decoration:none">Xで共有する</a><br><br><button id="revisit" class="secondary">第3問から再乗車</button> <button id="reset2" class="secondary">最初から</button></section>
+<section id="ending" class="card end hidden"><div id="endBadge" class="kicker"></div><h2>またね。</h2><div id="stamp" class="stamp hidden">5号車 乗車済</div><p id="endText"></p><button id="shareX" class="primary">Xで共有する</button><br><br><button id="revisit" class="secondary">第3問から再乗車</button> <button id="reset2" class="secondary">最初から</button></section>
 <div class="foot"><button id="reset" style="background:none;border:0;color:inherit;text-decoration:underline">最初から遊ぶ</button></div>
 </div>
 <div id="dlg" class="dialog hidden"><div class="box"><div id="dk" class="kick"></div><h2 id="dt"></h2><p id="db"></p><button id="dgo" class="primary" style="width:100%">戻る</button></div></div>
@@ -86,7 +86,20 @@ dialog('照合結果','行き先を確認できませんでした。','')
 }
 function reveal(){var f=['■■■','ま■■','また■','またね'],i=0;$('reveal').classList.remove('hidden');function go(){$('rv').textContent=f[i++];if(i<f.length)setTimeout(go,700);else setTimeout(function(){$('reveal').classList.add('hidden');state.end=true;state.q=[];save();render()},1000)}go()}
 function end(){var tr=state.secret;$('endBadge').textContent=tr?'SECRET JOURNEY / TRUE END':'JOURNEY COMPLETED / NORMAL END';$('stamp').classList.toggle('hidden',!tr);$('endText').textContent=tr?'最後まで、この列車に乗ってくれてありがとう。\n\nそして、この環状線に隠された小さな秘密まで、見つけてくれてありがとう。\n\n誰も乗らないと思っていた5号車にも、あなたは乗ってくれました。\n\nいつかまた、どこかの謎で会いましょう。':'最後まで、この列車に乗ってくれてありがとう。\n\nこの旅が、あなたにとって少しでも楽しい時間になっていたら嬉しいです。\n\nいつかまた、どこかの謎で会いましょう。'}
-var msg=tr?'Web謎「環状線」の小さな秘密まで見つけました🚃✨':'Web謎「環状線」をクリアしました🚃';var url='https://enjoji-road.github.io/kanjosen-webnazo/';var shareText=msg+'\n\n'+url;$('shareX').href='https://x.com/intent/tweet?text='+encodeURIComponent(shareText);
+var msg=tr?'Web謎「環状線」の小さな秘密まで見つけました🚃✨':'Web謎「環状線」をクリアしました🚃';
+var url='https://enjoji-road.github.io/kanjosen-webnazo/';
+$('shareX').onclick=async function(){
+  var shareText=msg+'\n\n'+url;
+  if(navigator.share){
+    try{
+      await navigator.share({text:msg,url:url});
+      return;
+    }catch(e){
+      if(e&&e.name==='AbortError')return;
+    }
+  }
+  window.location.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText);
+};
 document.querySelectorAll('.mode').forEach(function(b){b.onclick=function(){
 var m=b.dataset.mode;if(m==='C'&&!state.c)return;
 var z=q();
