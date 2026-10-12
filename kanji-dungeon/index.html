@@ -10,7 +10,7 @@
 button{font:inherit}.app{max-width:760px;margin:auto;padding:18px 14px 80px}.title{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}.title h1{margin:0;font-size:22px;letter-spacing:.12em}.subtitle{font-size:12px;color:var(--muted);margin-top:4px}.reset{border:1px solid #624834;background:#24150e;color:#c6b39b;border-radius:8px;padding:7px 10px;font-size:12px}
 .tabs{display:flex;gap:7px;margin:18px 0 12px;flex-wrap:wrap}.tab{border:1px solid #654a36;background:#24160f;color:#c1ab91;border-radius:9px;padding:8px 13px;min-width:52px}.tab.active{background:#4b3424;color:#fff1d6;border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,163,93,.18) inset}.panel{background:linear-gradient(180deg,rgba(52,33,23,.96),rgba(35,21,15,.97));border:1px solid #6b4d38;border-radius:16px;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
 .status{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.floorname{font-weight:700;letter-spacing:.12em}.count{font-size:12px;color:var(--muted)}
-.board-wrap{display:flex;justify-content:center;overflow:auto;padding:8px 0 4px}.board{display:grid;grid-template-columns:repeat(11,var(--cell));grid-template-rows:repeat(11,var(--cell));gap:2px;background:#150d08;border:1px solid #5c402e;padding:7px;border-radius:12px;box-shadow:inset 0 0 30px rgba(0,0,0,.45)}
+.board-wrap{display:flex;justify-content:center;overflow:auto;padding:8px 0 4px}.board-tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 4px}.board-tool{min-height:46px;border:1px solid #76583f;background:#2f1e14;color:#eadbc4;border-radius:10px;font-weight:700;letter-spacing:.04em;box-shadow:0 2px 0 #140b07}.board-tool:active:not(:disabled){transform:translateY(1px);box-shadow:0 1px 0 #140b07}.board-tool:disabled{opacity:.35}.board-tool.reset-board{border-color:#8a5b46;color:#efc2ad}.board{display:grid;grid-template-columns:repeat(11,var(--cell));grid-template-rows:repeat(11,var(--cell));gap:2px;background:#150d08;border:1px solid #5c402e;padding:7px;border-radius:12px;box-shadow:inset 0 0 30px rgba(0,0,0,.45)}
 .cell{width:var(--cell);height:var(--cell);display:flex;align-items:center;justify-content:center;position:relative;border-radius:4px;background:#21150f;color:transparent;user-select:none}.cell.path{background:linear-gradient(145deg,#523b2b,#3f2c20);border:1px solid #76583f;color:var(--ink);font-weight:700;font-size:clamp(15px,4.5vw,23px)}.cell.emptytext{color:transparent}.cell.cross{box-shadow:inset 0 0 0 1px rgba(154,166,115,.55)}.cell.meta-ready{cursor:pointer}.cell.meta-ready::after{content:attr(data-num);position:absolute;right:1px;top:-3px;color:#f1cc78;font-size:11px;font-weight:800;text-shadow:0 1px 2px #000}.cell.rock{background:linear-gradient(145deg,#66594d,#443a32);border:1px solid #8c7a68;color:#f4eadb;font-size:14px;cursor:pointer;box-shadow:inset 0 0 10px rgba(255,255,255,.04)}.cell.hot{cursor:pointer}.cell.hot:active{transform:scale(.94)}.cell.object-cell{background:transparent;border:0;color:#b99b73;cursor:pointer;overflow:visible}.cell.object-cell:hover{color:#d4b98b}.cell.object-cell:active{transform:scale(.94)}.object-icon{width:78%;height:78%;display:block;filter:drop-shadow(0 3px 2px rgba(0,0,0,.35))}.cell.key-object{color:#aa967d}.cell.key-object .object-icon{width:92%;height:92%}
 .section{margin-top:14px}.section-title{font-size:12px;color:#c3ac90;letter-spacing:.12em;margin-bottom:7px}.tiles{display:flex;gap:8px;flex-wrap:wrap}.tile{width:46px;height:46px;border:1px solid #80684d;background:linear-gradient(#dfc9a2,#bea47c);color:#302116;border-radius:8px;font-weight:800;font-size:22px;box-shadow:0 3px 0 #765b3e;transition:.12s}.tile.selected{transform:translateY(2px);box-shadow:0 1px 0 #765b3e;outline:2px solid var(--teal)}.tile.used{opacity:.28;filter:grayscale(1);box-shadow:none}.tile:disabled{cursor:default}
 .wordbank{display:flex;gap:8px;flex-wrap:wrap}.wordchip{border:1px solid #785b40;background:#2b1b12;color:#eadbc4;border-radius:8px;padding:8px 11px;font-weight:700;letter-spacing:.08em}.wordchip.selected{outline:2px solid #a9b17d;background:#3a291b}.wordchip.placed{opacity:.55}.inventory{display:flex;align-items:center;gap:8px;min-height:46px}.inv-label{font-size:12px;color:var(--muted)}.inv-tile{width:42px;height:42px;border-radius:8px;border:1px solid var(--gold);background:#dcc39a;color:#312116;font-size:20px;font-weight:800}.inv-tile.selected{outline:3px solid var(--teal)}
@@ -25,7 +25,7 @@ button{font:inherit}.app{max-width:760px;margin:auto;padding:18px 14px 80px}.tit
   <div class="tabs" id="tabs"></div>
   <div class="panel">
     <div class="status"><div class="floorname" id="floorName"></div><div class="count" id="count"></div></div>
-    <div class="board-wrap"><div class="board" id="board"></div></div>
+    <div class="board-wrap"><div class="board" id="board"></div></div><div class="board-tools"><button class="board-tool" id="undoBtn">↶ 一手戻る</button><button class="board-tool reset-board" id="boardResetBtn">盤面リセット</button></div>
     <div class="section"><div class="section-title">漢字</div><div class="tiles" id="tiles"></div></div><div class="section" id="wordsSection" style="display:none"><div class="section-title">変換されたことば</div><div class="wordbank" id="wordbank"></div></div>
     <div class="section" id="inventorySection" style="display:none"><div class="section-title">持ち物</div><div class="inventory"><div id="inventory"></div></div></div>
     <button class="stairs" id="stairs">階段を上る</button>
@@ -117,6 +117,12 @@ let state=load()||{
  selected:[], selectedWord:null, inventory:[], invSelected:null, metaUnlocked:false, metaFound:[], rockRead:false, trap:false, swapped:false, finalRead:false, clear:false
 };
 let toastTimer=null;
+const boardHistory={1:[],2:[],3:[],4:[],5:[]};
+function clonePlacements(f){return JSON.parse(JSON.stringify(state.placements[f]||{}))}
+function pushBoardHistory(f){boardHistory[f].push({placements:clonePlacements(f),selectedWord:state.selectedWord});if(boardHistory[f].length>30)boardHistory[f].shift()}
+function undoBoard(){const f=state.floor,h=boardHistory[f].pop();if(!h){toast('戻せる手がない');return}state.placements[f]=h.placements;state.selectedWord=h.selectedWord;toast('一手戻した');render()}
+function resetBoard(){const f=state.floor;if(Object.keys(state.placements[f]).length===0){toast('盤面は空です');return}pushBoardHistory(f);state.placements[f]={};state.selectedWord=null;toast('盤面をリセットした');render()}
+function renderBoardTools(){const f=state.floor;const undo=document.getElementById('undoBtn'),reset=document.getElementById('boardResetBtn');if(!undo||!reset)return;const locked=state.metaUnlocked;undo.disabled=locked||boardHistory[f].length===0;reset.disabled=locked||Object.keys(state.placements[f]).length===0;}
 function save(){localStorage.setItem(SAVE,JSON.stringify(state))}
 function load(){try{return JSON.parse(localStorage.getItem(SAVE))}catch(e){return null}}
 function cellsFor(word){return [...word.r].map((ch,i)=>({row:word.row+(word.d==='v'?i:0),col:word.col+(word.d==='h'?i:0),ch}))}
@@ -154,7 +160,7 @@ function renderFloor(){
  const f=state.floor;
  document.getElementById('floorName').textContent=FLOORS[f].name;
  document.getElementById('count').textContent='熟語 '+state.formed[f].length+' / 6 ・ 配置 '+Object.keys(state.placements[f]).length+' / 6';
- renderBoard(f);renderTiles(f);renderWordBank(f);renderInventory();renderStairs(f);renderMeta()
+ renderBoard(f);renderTiles(f);renderWordBank(f);renderInventory();renderStairs(f);renderMeta();renderBoardTools()
 }
 function objectAt(f,row,col){return (OBJECTS[f]||[]).find(o=>o.row===row&&o.col===col)||null}
 function objectSvg(type){
@@ -212,7 +218,7 @@ function handleCellClick(f,row,col,info){
  if(f===1&&state.trap&&state.swapped&&placedWords.includes('zaihou')){finishGame();return}
  if(placedWords.length===1){
   const wordId=placedWords[0],slotId=placedSlotForWord(f,wordId);
-  if(slotId){delete state.placements[f][slotId];state.selectedWord=wordId;toast(wordDef(f,wordId).r+' を外した');render()}
+  if(slotId){pushBoardHistory(f);delete state.placements[f][slotId];state.selectedWord=wordId;toast(wordDef(f,wordId).r+' を外した');render()}
  }else if(placedWords.length>1)toast('外すなら、交差していないマスを選んでください')
 }
 function placeSelectedAtCell(f,info){
@@ -220,7 +226,7 @@ function placeSelectedAtCell(f,info){
  const candidates=info.slotIds.filter(slotId=>canPlaceInSlot(f,slotId,wordId));
  if(candidates.length===0){toast('そこには入らないようだ');return}
  if(candidates.length>1){toast('横か縦か分かるマスを選んでください');return}
- state.placements[f][candidates[0]]=wordId;state.selectedWord=null;toast(word.r+' を埋めた');
+ pushBoardHistory(f);state.placements[f][candidates[0]]=wordId;state.selectedWord=null;toast(word.r+' を埋めた');
  if(Object.keys(state.placements[f]).length===6&&!floorComplete(f))setTimeout(()=>toast('まだどこか違うようだ'),250);
  if(floorComplete(f))setTimeout(()=>onFloorComplete(f),250);
  render()
@@ -251,7 +257,7 @@ function pickLoose(f,ch){if(!floorComplete(f))return;state.picked[f]=true;if(!st
 function renderWordBank(f){
  const sec=document.getElementById('wordsSection'),holder=document.getElementById('wordbank');holder.innerHTML='';sec.style.display=state.formed[f].length?'block':'none';
  state.formed[f].forEach(id=>{const w=wordDef(f,id),slot=placedSlotForWord(f,id),b=document.createElement('button');b.className='wordchip'+(state.selectedWord===id?' selected':'')+(slot?' placed':'');b.textContent=w.r;
-  b.onclick=()=>{if(slot){delete state.placements[f][slot];state.selectedWord=id;toast(w.r+' を外した')}else state.selectedWord=state.selectedWord===id?null:id;render()};holder.appendChild(b)
+  b.onclick=()=>{if(slot){pushBoardHistory(f);delete state.placements[f][slot];state.selectedWord=id;toast(w.r+' を外した')}else state.selectedWord=state.selectedWord===id?null:id;render()};holder.appendChild(b)
  })
 }
 function renderInventory(){const sec=document.getElementById('inventorySection'),holder=document.getElementById('inventory');holder.innerHTML='';sec.style.display=state.inventory.length?'block':'none';state.inventory.forEach(ch=>{const b=document.createElement('button');b.className='inv-tile'+(state.invSelected===ch?' selected':'');b.textContent=ch;b.onclick=()=>{state.invSelected=state.invSelected===ch?null:ch;render()};holder.appendChild(b)})}
@@ -263,6 +269,8 @@ function trySwap(){if(!state.trap||state.swapped)return;if(state.invSelected!=='
 function finishGame(){if(state.clear)return;state.clear=true;modal('財宝を見つけた！','上へ上へと進んだ末、宝は最初の階に眠っていた。\n\nCLEAR');render()}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1500)}
 function modal(title,text,after){const m=document.getElementById('modal');document.getElementById('modalTitle').textContent=title;document.getElementById('modalText').textContent=text||'';m.classList.add('show');const btn=document.getElementById('modalBtn');btn.onclick=()=>{m.classList.remove('show');if(after)after()}}
+document.getElementById('undoBtn').onclick=undoBoard;
+document.getElementById('boardResetBtn').onclick=resetBoard;
 document.getElementById('resetBtn').onclick=()=>{if(confirm('進行状況をすべて消しますか？')){localStorage.removeItem(SAVE);location.reload()}}
 render();
 </script>
