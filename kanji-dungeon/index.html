@@ -11,7 +11,7 @@ button{font:inherit}.app{max-width:760px;margin:auto;padding:18px 14px 80px}.tit
 .tabs{display:flex;gap:7px;margin:18px 0 12px;flex-wrap:wrap}.tab{border:1px solid #654a36;background:#24160f;color:#c1ab91;border-radius:9px;padding:8px 13px;min-width:52px}.tab.active{background:#4b3424;color:#fff1d6;border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,163,93,.18) inset}.panel{background:linear-gradient(180deg,rgba(52,33,23,.96),rgba(35,21,15,.97));border:1px solid #6b4d38;border-radius:16px;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
 .status{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.floorname{font-weight:700;letter-spacing:.12em}.count{font-size:12px;color:var(--muted)}
 .board-wrap{display:flex;justify-content:center;overflow:auto;padding:8px 0 4px}.board{display:grid;grid-template-columns:repeat(11,var(--cell));grid-template-rows:repeat(11,var(--cell));gap:2px;background:#150d08;border:1px solid #5c402e;padding:7px;border-radius:12px;box-shadow:inset 0 0 30px rgba(0,0,0,.45)}
-.cell{width:var(--cell);height:var(--cell);display:flex;align-items:center;justify-content:center;position:relative;border-radius:4px;background:#21150f;color:transparent;user-select:none}.cell.path{background:linear-gradient(145deg,#523b2b,#3f2c20);border:1px solid #76583f;color:var(--ink);font-weight:700;font-size:clamp(15px,4.5vw,23px)}.cell.emptytext{color:transparent}.cell.cross{box-shadow:inset 0 0 0 1px rgba(154,166,115,.55)}.cell.meta-ready{cursor:pointer}.cell.meta-ready::after{content:attr(data-num);position:absolute;right:1px;top:-3px;color:#f1cc78;font-size:11px;font-weight:800;text-shadow:0 1px 2px #000}.cell.rock{background:linear-gradient(145deg,#66594d,#443a32);border:1px solid #8c7a68;color:#f4eadb;font-size:14px;cursor:pointer;box-shadow:inset 0 0 10px rgba(255,255,255,.04)}.cell.hot{cursor:pointer}.cell.hot:active{transform:scale(.94)}
+.cell{width:var(--cell);height:var(--cell);display:flex;align-items:center;justify-content:center;position:relative;border-radius:4px;background:#21150f;color:transparent;user-select:none}.cell.path{background:linear-gradient(145deg,#523b2b,#3f2c20);border:1px solid #76583f;color:var(--ink);font-weight:700;font-size:clamp(15px,4.5vw,23px)}.cell.emptytext{color:transparent}.cell.cross{box-shadow:inset 0 0 0 1px rgba(154,166,115,.55)}.cell.meta-ready{cursor:pointer}.cell.meta-ready::after{content:attr(data-num);position:absolute;right:1px;top:-3px;color:#f1cc78;font-size:11px;font-weight:800;text-shadow:0 1px 2px #000}.cell.rock{background:linear-gradient(145deg,#66594d,#443a32);border:1px solid #8c7a68;color:#f4eadb;font-size:14px;cursor:pointer;box-shadow:inset 0 0 10px rgba(255,255,255,.04)}.cell.hot{cursor:pointer}.cell.hot:active{transform:scale(.94)}.cell.object-cell{background:transparent;border:0;color:#b99b73;cursor:pointer;overflow:visible}.cell.object-cell:hover{color:#d4b98b}.cell.object-cell:active{transform:scale(.94)}.object-icon{width:78%;height:78%;display:block;filter:drop-shadow(0 3px 2px rgba(0,0,0,.35))}.cell.key-object{color:#aa967d}.cell.key-object .object-icon{width:92%;height:92%}
 .section{margin-top:14px}.section-title{font-size:12px;color:#c3ac90;letter-spacing:.12em;margin-bottom:7px}.tiles{display:flex;gap:8px;flex-wrap:wrap}.tile{width:46px;height:46px;border:1px solid #80684d;background:linear-gradient(#dfc9a2,#bea47c);color:#302116;border-radius:8px;font-weight:800;font-size:22px;box-shadow:0 3px 0 #765b3e;transition:.12s}.tile.selected{transform:translateY(2px);box-shadow:0 1px 0 #765b3e;outline:2px solid var(--teal)}.tile.used{opacity:.28;filter:grayscale(1);box-shadow:none}.tile:disabled{cursor:default}
 .wordbank{display:flex;gap:8px;flex-wrap:wrap}.wordchip{border:1px solid #785b40;background:#2b1b12;color:#eadbc4;border-radius:8px;padding:8px 11px;font-weight:700;letter-spacing:.08em}.wordchip.selected{outline:2px solid #a9b17d;background:#3a291b}.wordchip.placed{opacity:.55}.inventory{display:flex;align-items:center;gap:8px;min-height:46px}.inv-label{font-size:12px;color:var(--muted)}.inv-tile{width:42px;height:42px;border-radius:8px;border:1px solid var(--gold);background:#dcc39a;color:#312116;font-size:20px;font-weight:800}.inv-tile.selected{outline:3px solid var(--teal)}
 .stairs{margin:16px auto 2px;display:none;border:1px solid #9a7746;background:#3b2819;color:#f3d99c;padding:11px 18px;border-radius:10px;font-weight:700}.stairs.show{display:block}.meta{margin-top:14px;border-top:1px solid #654a36;padding-top:12px;display:none}.meta.show{display:block}.slots{display:flex;gap:6px;justify-content:center}.slot{width:36px;height:42px;border-bottom:2px solid #9a7955;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700}.hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#24150e;border:1px solid #76563d;color:#fff0d8;border-radius:10px;padding:10px 14px;opacity:0;pointer-events:none;transition:.2s;z-index:50;max-width:86vw;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -77,6 +77,33 @@ const META=[
  {n:1,f:1,row:6,col:4,ch:'い'}, {n:2,f:2,row:10,col:6,ch:'わ'}, {n:3,f:3,row:6,col:7,ch:'の'},
  {n:4,f:4,row:3,col:3,ch:'し'}, {n:5,f:3,row:4,col:5,ch:'た'}, {n:6,f:5,row:5,col:1,ch:'よ'}, {n:7,f:1,row:3,col:2,ch:'め'}
 ];
+const OBJECTS={
+ 1:[
+  {row:2,col:10,type:'torch',name:'松明',text:'壁の松明が、静かに燃えている。'},
+  {row:9,col:2,type:'crate',name:'木箱',text:'古びた木箱だ。中は空っぽだった。'},
+  {row:10,col:9,type:'rubble',name:'小石',text:'足元に小さな石が転がっている。'}
+ ],
+ 2:[
+  {row:2,col:2,type:'pot',name:'壺',text:'ひび割れた壺だ。'},
+  {row:10,col:10,type:'bones',name:'骨',text:'古い骨が散らばっている。'},
+  {row:3,col:5,type:'crack',name:'ひび',text:'床に細いひびが走っている。'}
+ ],
+ 3:[
+  {row:1,col:1,type:'candle',name:'燭台',text:'消えかけの火が揺れている。'},
+  {row:9,col:2,type:'statue',name:'石像',text:'誰かをかたどった石像だ。'},
+  {row:9,col:10,type:'chain',name:'鎖',text:'錆びた鎖が床に落ちている。'}
+ ],
+ 4:[
+  {row:2,col:9,type:'bell',name:'鐘',text:'小さな鐘だ。今は鳴らない。'},
+  {row:9,col:9,type:'trap',name:'傷跡',text:'床に何かが作動したような跡がある。'},
+  {row:10,col:3,type:'column',name:'崩れた柱',text:'柱の一部が崩れ落ちている。'}
+ ],
+ 5:[
+  {row:6,col:6,type:'rock',name:'岩',text:'大きな岩だ。びくともしない。',key:true},
+  {row:8,col:2,type:'stele',name:'石碑',text:'文字らしき跡はあるが、もう読めない。'},
+  {row:9,col:10,type:'pillar',name:'壊れた柱',text:'折れた柱が転がっている。'}
+ ]
+};
 const TILE_ORDER={
 1:['危','財','迷','金','段','鏡','双','宝','路','階','険','塊','璧'],
 2:['封','宝','腕','遺','珠','財','石','神','輪','跡','真','印','話'],
@@ -129,18 +156,48 @@ function renderFloor(){
  document.getElementById('count').textContent='熟語 '+state.formed[f].length+' / 6 ・ 配置 '+Object.keys(state.placements[f]).length+' / 6';
  renderBoard(f);renderTiles(f);renderWordBank(f);renderInventory();renderStairs(f);renderMeta()
 }
+function objectAt(f,row,col){return (OBJECTS[f]||[]).find(o=>o.row===row&&o.col===col)||null}
+function objectSvg(type){
+ const common='viewBox="0 0 48 48" aria-hidden="true" class="object-icon" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"';
+ const icons={
+  torch:`<svg ${common}><path d="M22 20v20M26 20v20M18 40h12"/><path d="M24 6c6 6 2 11 0 14-5-3-7-8 0-14Z" fill="currentColor" stroke="none"/></svg>`,
+  crate:`<svg ${common}><rect x="8" y="11" width="32" height="28" rx="2"/><path d="m11 14 26 22M37 14 11 36M8 20h32M8 30h32"/></svg>`,
+  rubble:`<svg ${common}><path d="M9 33 15 24 24 27 30 17 40 32 34 38 15 39Z"/><path d="m20 27 4 7M30 23l4 8"/></svg>`,
+  pot:`<svg ${common}><path d="M14 13h20M17 13c-2 6-5 10-5 16 0 8 6 11 12 11s12-3 12-11c0-6-3-10-5-16"/><path d="M16 20h16"/></svg>`,
+  bones:`<svg ${common}><path d="m11 14 26 22M37 14 11 36"/><circle cx="10" cy="13" r="3"/><circle cx="38" cy="13" r="3"/><circle cx="10" cy="37" r="3"/><circle cx="38" cy="37" r="3"/></svg>`,
+  crack:`<svg ${common}><path d="M25 5 19 16l6 4-8 8 6 3-5 12M25 20l9-5M18 28l-8 4M23 31l9 7"/></svg>`,
+  candle:`<svg ${common}><path d="M16 39h17M20 39V18h9v21M22 25h5"/><path d="M24 5c5 5 2 9 0 12-4-2-6-6 0-12Z" fill="currentColor" stroke="none"/></svg>`,
+  statue:`<svg ${common}><circle cx="24" cy="11" r="6"/><path d="M17 19h14l4 20H13Z"/><path d="M10 40h28M19 23v10M29 23v10"/></svg>`,
+  chain:`<svg ${common}><ellipse cx="16" cy="17" rx="8" ry="5" transform="rotate(-35 16 17)"/><ellipse cx="25" cy="24" rx="8" ry="5" transform="rotate(-35 25 24)"/><ellipse cx="34" cy="31" rx="8" ry="5" transform="rotate(-35 34 31)"/></svg>`,
+  bell:`<svg ${common}><path d="M15 34h18l-2-4V20c0-5-3-9-7-9s-7 4-7 9v10Z"/><path d="M21 38h6M22 8h4"/></svg>`,
+  trap:`<svg ${common}><path d="M8 37h32M12 37l5-11 5 11 5-14 5 14 4-9 4 9"/><path d="M10 14h28"/></svg>`,
+  column:`<svg ${common}><path d="M13 9h22M16 13h16M17 13v21M31 13v21M14 34h20M11 39h26"/><path d="m17 23 5-4 4 5 5-3"/></svg>`,
+  stele:`<svg ${common}><path d="M13 40V18c0-7 5-12 11-12s11 5 11 12v22Z"/><path d="M19 18h10M18 25h12M20 32h8"/></svg>`,
+  rock:`<svg ${common}><path d="M7 34 12 19 20 10l12 3 9 12-4 13H13Z" fill="currentColor" fill-opacity=".22"/><path d="m15 23 7-5 8 3 5 9M20 10l2 8M12 19l10-1"/></svg>`,
+  pillar:`<svg ${common}><path d="M14 9h20M17 13h14M19 13v13M29 13v9M11 38h27M15 34h18"/><path d="m19 26 5-5 5 5 4-4"/></svg>`
+ };
+ return icons[type]||'';
+}
+function interactObject(f,obj){
+ if(obj.key){readRock();return}
+ toast(obj.text||obj.name)
+}
 function renderBoard(f){
  const board=document.getElementById('board');board.innerHTML='';const {map,counts}=boardMap(f);
  for(let r=1;r<=11;r++)for(let col=1;col<=11;col++){
-  const d=document.createElement('div');d.className='cell';const info=map.get(coordKey(r,col));
+  const d=document.createElement('div');d.className='cell';const info=map.get(coordKey(r,col));const obj=objectAt(f,r,col);
   if(info){
    d.classList.add('path');if((counts.get(coordKey(r,col))||0)>1)d.classList.add('cross');
    d.textContent=info.letters.length?info.letters[0].ch:'';if(!info.letters.length)d.classList.add('emptytext');
    const meta=META.find(m=>m.f===f&&m.row===r&&m.col===col);
    if(state.metaUnlocked&&meta){d.dataset.num=['','①','②','③','④','⑤','⑥','⑦'][meta.n];d.classList.add('meta-ready')}
    d.classList.add('hot');d.onclick=()=>handleCellClick(f,r,col,info);
+  }else if(obj){
+   d.className='cell object-cell'+(obj.key?' key-object':'');
+   d.innerHTML=objectSvg(obj.type);
+   d.setAttribute('aria-label',obj.name);
+   d.onclick=()=>interactObject(f,obj);
   }
-  if(f===5&&r===6&&col===6){d.className='cell rock';d.textContent='岩';d.onclick=readRock}
   board.appendChild(d)
  }
 }
@@ -200,7 +257,7 @@ function renderWordBank(f){
 function renderInventory(){const sec=document.getElementById('inventorySection'),holder=document.getElementById('inventory');holder.innerHTML='';sec.style.display=state.inventory.length?'block':'none';state.inventory.forEach(ch=>{const b=document.createElement('button');b.className='inv-tile'+(state.invSelected===ch?' selected':'');b.textContent=ch;b.onclick=()=>{state.invSelected=state.invSelected===ch?null:ch;render()};holder.appendChild(b)})}
 function renderMeta(){const box=document.getElementById('meta'),slots=document.getElementById('slots');box.classList.toggle('show',state.metaUnlocked&&state.metaFound.length>0);slots.innerHTML='';for(let n=1;n<=7;n++){const m=META.find(x=>x.n===n);const s=document.createElement('div');s.className='slot';s.textContent=state.metaFound.includes(n)?m.ch:'';slots.appendChild(s)}}
 function collectMeta(m){if(!state.metaUnlocked)return;if(!state.metaFound.includes(m.n)){state.metaFound.push(m.n);state.metaFound.sort((a,b)=>a-b);toast(`${['','①','②','③','④','⑤','⑥','⑦'][m.n]} ${m.ch}`);render()}}
-function readRock(){if(!state.metaUnlocked){toast('硬い岩だ');return}if(state.metaFound.length<7){toast('硬い岩だ');return}if(state.swapped){state.finalRead=true;toast('岩の下を、もう一度確かめる');}else{state.rockRead=true;toast('岩の下へ、空洞が続いている');}render()}
+function readRock(){if(!state.metaUnlocked){toast('大きな岩だ。びくともしない。');return}if(state.metaFound.length<7){toast('大きな岩だ。びくともしない。');return}if(state.swapped){state.finalRead=true;toast('岩の下を、もう一度確かめる');}else{state.rockRead=true;toast('岩の下へ、空洞が続いている');}render()}
 function triggerTrap(){if(state.trap)return;state.trap=true;modal('警報が鳴り響いた！','足元が崩れた。\n\n気がつくと、1Fまで落とされていた。',()=>{state.floor=1;render()});render()}
 function trySwap(){if(!state.trap||state.swapped)return;if(state.invSelected!=='財'){toast('何か使えそうなものがあれば……');return}if(!state.inventory.includes('財'))return;state.inventory=state.inventory.filter(x=>x!=='財');state.invSelected=null;state.swapped=true;state.finalRead=true;toast('家系 → 家財');modal('家財','「系」を外し、「財」をはめた。');render()}
 function finishGame(){if(state.clear)return;state.clear=true;modal('財宝を見つけた！','上へ上へと進んだ末、宝は最初の階に眠っていた。\n\nCLEAR');render()}
